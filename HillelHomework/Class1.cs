@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace HillelHomework
@@ -18,7 +19,7 @@ namespace HillelHomework
             Women,
             Unknown
         }
-
+        Regex reg = new Regex(pattern: "([A-Z][a-z]*)");
         public User()
         {
 
@@ -42,7 +43,40 @@ namespace HillelHomework
                 ChangeGender();
             }
         }
- 
+        public void ChangeFirstName()
+        {
+            Console.Write("Input new First Name: ");
+        string? userInput = Console.ReadLine();
+            if (reg.IsMatch(userInput))
+            {
+                FirstName = userInput;
+            }
+            else 
+            {
+                Console.WriteLine("Incorrect input: Use letters and first name must start with uppercase.");
+                ChangeFirstName();
+            }
+
+        }
+
+        public void ChangeLastName()
+        {
+            Console.Write("Inpt new Last Name: ");
+            string? userInput = Console.ReadLine();
+            if (reg.IsMatch(userInput))
+            {
+                LastName = userInput;
+            }
+            else
+            {
+                Console.WriteLine("Incorrect input: Use letters and last name must start with uppercase");
+                ChangeLastName();
+            }
+
+        }
+       
+        
+
         public override string ToString()
         {
             if (Age < 10)
