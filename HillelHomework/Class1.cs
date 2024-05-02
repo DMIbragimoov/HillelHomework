@@ -19,7 +19,7 @@ namespace HillelHomework
             Women,
             Unknown
         }
-        Regex reg = new Regex(pattern: "([A-Z][a-z]*)");
+        Regex reg = new Regex(pattern: "^[A-Z][a-zA-Z]*$");
         public User()
         {
 
@@ -32,7 +32,7 @@ namespace HillelHomework
         public void ChangeGender()
         {
             Console.WriteLine("Choose gender: 1 - Male, 2 - Women, 3 - Unknown");
-            int userInput = Convert.ToInt32(Console.ReadLine());
+            int.TryParse(Console.ReadLine(), out int userInput);
             if (Enum.IsDefined(typeof(Gender), userInput)) 
             {
                 UserGender = (Gender)userInput;
