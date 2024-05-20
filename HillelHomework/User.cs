@@ -13,12 +13,7 @@ namespace HillelHomework
         public string? LastName { get; private set; }
         public byte Age { get; init; }
         public Gender UserGender { get; private set; }
-        public enum Gender
-        {
-            Male = 1,
-            Women,
-            Unknown
-        }
+       
         Regex reg = new Regex(pattern: "^[A-Z][a-zA-Z]*$");
         public User()
         {
@@ -39,8 +34,8 @@ namespace HillelHomework
             }
             else
             {
-                Console.WriteLine("Invalid number!");
-                ChangeGender();
+                throw new ArgumentException();
+               
             }
         }
         public void ChangeFirstName()
