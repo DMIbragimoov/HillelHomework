@@ -26,23 +26,7 @@ namespace HillelHomework
             Age = age;
         }
 
-        public void ChangeGender(string userInput)
-        {
-            
-           
-            if (Enum.TryParse(userInput, out Gender genderByName) && Enum.IsDefined(typeof(Gender), genderByName))
-            {
-                UserGender = genderByName;
-            }
-            else if (int.TryParse(userInput, out int numericValue) && Enum.IsDefined(typeof(Gender), numericValue))
-            {
-                UserGender = (Gender)numericValue;
-            }
-            else
-            {
-                Console.WriteLine("Incorrect input!Try again:");
-            }
-        }
+       
         public bool ValidateNameInput(string userInput)
         {
             return reg.IsMatch(userInput);
