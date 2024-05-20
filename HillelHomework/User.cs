@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -24,53 +25,45 @@ namespace HillelHomework
             Age = age;
         }
 
-        public void ChangeGender()
+        public void ChangeGender(string userInput)
         {
-            Console.WriteLine("Choose gender: 1 - Male, 2 - Women, 3 - Unknown");
-            int.TryParse(Console.ReadLine(), out int userInput);
-            if (Enum.IsDefined(typeof(Gender), userInput)) 
+            
+           
+            if (Enum.TryParse(userInput, out Gender genderByName) && Enum.IsDefined(typeof(Gender), genderByName))
             {
-                UserGender = (Gender)userInput;
+                UserGender = genderByName;
+            }
+            else if (int.TryParse(userInput, out int numericValue) && Enum.IsDefined(typeof(Gender), numericValue))
+            {
+                UserGender = (Gender)numericValue;
             }
             else
             {
-                throw new ArgumentException();
-               
+                throw new FormatException();
             }
         }
-        public void ChangeFirstName()
+        public void ChangeName(string userInput, string nameToChange)
         {
-            Console.Write("Input new First Name: ");
-        string? userInput = Console.ReadLine();
-            if (reg.IsMatch(userInput))
+            if(!reg.IsMatch(userInput))
             {
-                FirstName = userInput;
+                throw new FormatException();
             }
-            else 
+            switch (nameToChange.ToLower())
             {
-                Console.WriteLine("Incorrect input: Use letters and first name must start with uppercase.");
-                ChangeFirstName();
-            }
+                case "firstname":
 
+                    FirstName = userInput;
+                    break;
+                case "lastname":
+                    LastName = userInput;
+                    break;
+                default:
+                    throw new ArgumentException("Invalid property name. Use 'firstname' or 'lastname'.");
+            }
         }
 
-        public void ChangeLastName()
-        {
-            Console.Write("Inpt new Last Name: ");
-            string? userInput = Console.ReadLine();
-            if (reg.IsMatch(userInput))
-            {
-                LastName = userInput;
-            }
-            else
-            {
-                Console.WriteLine("Incorrect input: Use letters and last name must start with uppercase");
-                ChangeLastName();
-            }
 
-        }
-       
-        
+
 
         public override string ToString()
         {

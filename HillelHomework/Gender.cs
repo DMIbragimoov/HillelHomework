@@ -8,8 +8,8 @@ namespace HillelHomework
 {
     public enum Gender
     {
-        Male = 1,
-        Women,
-        Unknown
+        male = 1,
+        women,
+        unknown
     }
 }
