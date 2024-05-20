@@ -10,12 +10,13 @@ namespace HillelHomework
 {
     public class User
     {
-        public string? FirstName { get; private set; }
-        public string? LastName { get; private set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get;  set; }
         public byte Age { get; init; }
-        public Gender UserGender { get; private set; }
-       
+        public Gender UserGender { get; set; }
+
         Regex reg = new Regex(pattern: "^[A-Z][a-zA-Z]*$");
+
         public User()
         {
 
@@ -39,29 +40,13 @@ namespace HillelHomework
             }
             else
             {
-                throw new FormatException();
+                Console.WriteLine("Incorrect input!Try again:");
             }
         }
-        public void ChangeName(string userInput, string nameToChange)
+        public bool ValidateNameInput(string userInput)
         {
-            if(!reg.IsMatch(userInput))
-            {
-                throw new FormatException();
-            }
-            switch (nameToChange.ToLower())
-            {
-                case "firstname":
-
-                    FirstName = userInput;
-                    break;
-                case "lastname":
-                    LastName = userInput;
-                    break;
-                default:
-                    throw new ArgumentException("Invalid property name. Use 'firstname' or 'lastname'.");
-            }
+            return reg.IsMatch(userInput);
         }
-
 
 
 
